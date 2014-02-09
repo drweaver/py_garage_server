@@ -6,6 +6,8 @@ Used to control an automatic garage door opener, features include:
 * Email notification when door remains open for a set period
 * Sensing door state changes
 
+[**TODO list**](https://gist.github.com/drweaver/8904740)
+
 ##Architecture & Design
 
 * [Bottle](http://bottlepy.org/) to manage REST service 
@@ -42,10 +44,3 @@ www/GarageControl.html
 www/ico/[several images]
 www/garagecontrol/[gwt javascript files] 
 ```
-
-##TODO
-
-- [ ] Dependencies e.g. RPIO, sqlite, python3, oauth, geopy, bottle
-- [ ] Configuration e.g. auth setup/disabling/location, email
-- [ ] How/when google auth proxy fits in
-- [ ] Running e.g. root, command-line, syste service/init.d
