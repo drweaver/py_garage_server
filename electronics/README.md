@@ -1,4 +1,4 @@
-I'm no expert at electronics - these designs came from several iterations based on how they performed and also from various web forums.
+I'm no expert at electronics - these designs came from several iterations based on how they performed and also from various web forums (e.g. see [here](http://www.raspberrypi.org/phpBB3/viewtopic.php?t=19222) ).
 
 It has been used with a Chamberlain garage door opener.
 
