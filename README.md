@@ -6,14 +6,13 @@ Used to control an automatic garage door opener, features include:
 * Email notification when door remains open for a set period
 * Sensing door state changes
 
-Technologies / Architecture / Design
-====================================
+##Architecture & Design
 
 * [Bottle](http://bottlepy.org/) to manage REST service 
 * [RPIO](https://pypi.python.org/pypi/RPIO) Raspberry Pi GPIO to control/sense door state 
 * sqlite database to store state
 * Google Web Toolkit (GWT) browser interface [Garage Control](https://github.com/drweaver/gwt_garage_control)
-* Google OAuth reverse proxy (written in GO) [google_auth_proxy](https://github.com/drweaver/google_auth_proxy)
+* Google OAuth reverse proxy (written in GO) for authentication and authorisation [google_auth_proxy](https://github.com/drweaver/google_auth_proxy)
 
 ```
 user ----> router [port forward] ----> oauth proxy ----> py_garage_server ----> garage.db
@@ -24,13 +23,11 @@ If not requiring external access or for testing can go directly from
 user to py_garage_server by disabling auth in config (see below) without
 the need for google_auth_proxy
 																		
-Electronics
-===========
+##Electronics
 
-Build the electronics - see README and diagrams in the electronics folder
+To build the electronics - see README and diagrams in the electronics folder
 
-Browser app
-===========
+##Browser app
 
 Download [garagecontrol-client.zip](https://github.com/drweaver/gwt_garage_control/releases/latest)
 
@@ -46,22 +43,9 @@ www/ico/[several images]
 www/garagecontrol/[gwt javascript files] 
 ```
 
-Dependencies
-============
+##TODO
 
-TODO: RPio, sqlite, python3, google oauth, geopy, bottle etc
-
-Configuration
-=============
-
-TODO: auth (setup/disabling/location), email, etc
-
-Running
-=======
-
-TODO: command-line, system service/init.d
-
-Authentication
-==============
-
-TODO: upload files and add details of google oauth
+- [ ] Dependencies e.g. RPIO, sqlite, python3, oauth, geopy, bottle
+- [ ] Configuration e.g. auth setup/disabling/location, email
+- [ ] How/when google auth proxy fits in
+- [ ] Running e.g. root, command-line, syste service/init.d
