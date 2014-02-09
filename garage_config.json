@@ -1,0 +1,24 @@
+{
+	"door_switch_enabled": false,
+	"notify_enabled": false,
+	"state_monitor_enabled": true,
+	"port": "5100",
+	"client_id": "",
+	"authorised": [ "" ],
+	"smtp_server": "smtp.gmail.com",
+	"smtp_port": 587,
+	"smtp_sender": "@gmail.com",
+	"smtp_recipient": "@gmail.com",
+	"smtp_pwd_file": "/usr/local/garagecontrol/smtp.pwd",
+	"lat" : ,
+    	"lng" : ,
+	"relay_channel":4,
+	"closed_channel":18,
+	"opened_channel":17,
+	"debounce_timeout_ms":500,
+	"distance_limit_miles":5,
+	"state_monitor_limit_mins": 15,
+	"state_monitor_interval_mins": 10,
+	"logfile": "/var/log/garage_service.log"
+	
+}
