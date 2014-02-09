@@ -35,7 +35,9 @@ Browser app
 Download [garagecontrol-client.zip](https://github.com/drweaver/gwt_garage_control/releases/latest)
 
 Put file in www folder and unzip: 
-$ unzip garagecontrol-client.zip .
+```bash
+unzip garagecontrol-client.zip .
+```
 
 It should create following file structure:
 ```
