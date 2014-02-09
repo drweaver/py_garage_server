@@ -5,7 +5,7 @@ $ sudo mkdir /usr/local/garagecontrol
 Checkout the latest code
 
 $ cd /usr/local/garagecontrol
-$ sudo svn co svn://192.168.0.200/repos/py_garage_server .
+$ sudo git clone https://github.com/drweaver/py_garage_server .
 
 create file /usr/local/garagecontrol/smtp.pwd and add the password:
 
