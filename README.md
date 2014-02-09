@@ -27,7 +27,7 @@ the need for google_auth_proxy
 																		
 ##Electronics
 
-To build the electronics - see README and diagrams in the electronics folder
+To build the electronics - see README and diagrams in the [electronics folder](electronics/README.md)
 
 ##Browser app
 
