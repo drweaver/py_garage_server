@@ -83,3 +83,13 @@ For GPIO port numbering [see here](http://pi.gadgetoid.com/pinout/gpio)
 * **state_monitor_limit_mins** Limit in minutes before sending notification of open state
 * **state_monitor_interval_mins** Period to check door state
 * **logfile** Location to write log file
+
+##Running
+
+The service must be run as root to bind to the GPIO ports.  The included run.sh can be used to start the server.
+```bash
+./run.sh &
+tail -f nohup.out
+```
+
+Alternatively, install and register as a system service.  The advantage is if your RPi is rebooted, the service wil automatically be started when the system returns.  See the [init.d](init.d) folder for instructions.
