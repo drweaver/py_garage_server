@@ -9,11 +9,11 @@ Used to control an automatic garage door opener, features include:
 Technologies / Architecture / Design
 ====================================
 
-Bottle to manage REST service http://bottlepy.org/
-RPIO Raspberry Pi GPIO to control/sense door state https://pypi.python.org/pypi/RPIO
-sqlite database to store state
-Google Web Toolkit (GWT) browser interface [TODO link to project]
-Google OAuth reverse proxy (written in GO) [TODO link to project]
+* [Bottle](http://bottlepy.org/) to manage REST service 
+* [RPIO](https://pypi.python.org/pypi/RPIO) Raspberry Pi GPIO to control/sense door state 
+* sqlite database to store state
+* Google Web Toolkit (GWT) browser interface [Garage Control](https://github.com/drweaver/gwt_garage_control)
+* Google OAuth reverse proxy (written in GO) **TODO link to project**
 
 user ----> router [port forward] ----> oauth proxy ----> py_garage_server ----> garage.db
                                                                         \-----> GPIO -----> Relay/Sensors
@@ -29,7 +29,7 @@ Build the electronics - see README and diagrams in the electronics folder
 Browser app
 ===========
 
-Download garagecontrol-client.zip from https://github.com/drweaver/gwt_garage_control/releases/latest
+Download [garagecontrol-client.zip](https://github.com/drweaver/gwt_garage_control/releases/latest)
 
 Put file in www folder and unzip: 
 $ unzip garagecontrol-client.zip .
