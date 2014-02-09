@@ -12,6 +12,7 @@ Used to control an automatic garage door opener, features include:
 
 * [Bottle](http://bottlepy.org/) to manage REST service 
 * [RPIO](https://pypi.python.org/pypi/RPIO) Raspberry Pi GPIO to control/sense door state 
+* Pyhon finite state machine [fysom](https://github.com/oxplot/fysom) to manage door states and events
 * sqlite database to store state
 * Google Web Toolkit (GWT) browser interface [Garage Control](https://github.com/drweaver/gwt_garage_control)
 * Google OAuth reverse proxy (written in GO) for authentication and authorisation [google_auth_proxy](https://github.com/drweaver/google_auth_proxy)
