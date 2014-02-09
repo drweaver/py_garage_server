@@ -15,13 +15,23 @@ On the right is the sensor circuit.  There are actually 2 of these, 1 to sense d
 
 [http://www.sainsmart.com/arduino-pro-mini.html](SainSmart 2-Channel 5V Relay Module)
 
-[Amazon UK](http://www.amazon.co.uk/gp/product/B005WR753Q)
+![Alt Sainsmart Relay](http://www.sainsmart.com/media/catalog/product/cache/1/image/500x500/9df78eab33525d08d6e5fb8d27136e95/i/m/img_6249.jpg)
 
+[Amazon UK](http://www.amazon.co.uk/gp/product/B005WR753Q)
 
 ##Sensors
 
 Very cheap magnetic reed switch from ebay (e.g. alarm window sensor)
 
+##Photos
+
+The 'opened' sensor - white block top left (closed sensor is further down the rail).  Door opener with shoe box on top containing Pi.
+
+![Alt sensor and opener](sensor_and_opener.jpg)
+
+Inside the shoe box - breadboard, relay and Pi.
+
+![Alt wiring and pi](wiring_and_pi.jpg)
+
 ###TODO
-* Photo from built system
 * how Pi ports relate to config file
