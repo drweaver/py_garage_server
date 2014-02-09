@@ -10,7 +10,9 @@ Used to control an automatic garage door opener, features include:
 
 ##Architecture & Design
 
-* [Bottle](http://bottlepy.org/) to manage REST service 
+* Python3 (unit test framework not compatible with python2)
+* [Bottle](http://bottlepy.org/) to manage REST service
+* [CherryPy](http://www.cherrypy.org) for HTTP server
 * [RPIO](https://pypi.python.org/pypi/RPIO) Raspberry Pi GPIO to control/sense door state 
 * Pyhon finite state machine [fysom](https://github.com/oxplot/fysom) to manage door states and events
 * sqlite database to store state
@@ -39,9 +41,17 @@ Put file in www folder and unzip:
 unzip garagecontrol-client.zip .
 ```
 
-It should create following file structure:
+Should create following file structure:
 ```
 www/GarageControl.html
 www/ico/[several images]
 www/garagecontrol/[gwt javascript files] 
+```
+
+##Dependencies
+
+Can be installed with following commands
+```bash
+sudo apt-get install python3 python3-pip
+sudo pip-3.2 install bottle RPi.GPIO geopy CherryPy mock
 ```
