@@ -55,3 +55,31 @@ Can be installed with following commands
 sudo apt-get install python3 python3-pip
 sudo pip-3.2 install bottle RPi.GPIO geopy CherryPy mock
 ```
+
+##Configuration
+
+Application settings can be found in [garage_config.json](garage_config.json).  Most settings are editable at runtime
+e.g. changing authorised list can be made without restarting the server.
+
+For GPIO port numbering [see here](http://pi.gadgetoid.com/pinout/gpio)
+
+* **door_switch_enabled** Set to false during testing - disables invoking relay GPIO
+* **notify_enabled** Email notification
+* **state_monitor_enabled** periodic check of door open status
+* **port** HTTP Port to listen on
+* **authorised** List of gmail addresses authorised (see [google_auth_proxy](https://github.com/drweaver/google_auth_proxy) - address is sent in the X-Forwarded-For header)
+* **smtp_server** SMTP server
+* **smtp_port** SMTP port
+* **smtp_sender** email of sender, usually your address
+* **smtp_recipient** email of person/people to notify 
+* **smtp_pwd_file** location of file containing password to email server
+* **lat** Latitude of your garage used during location authorisation
+* **lng** Longitude of your garage used during location authorisation
+* **relay_channel** GPIO port used to control the relay
+* **closed_channel** GPIO port used to detect sensor on door closure 
+* **opened_channel** GPIO port used to detect sensor on door opened
+* **debounce_timeout_ms** De-bounce timeout
+* **distance_limit_miles** Distance allowed from lat/lnb coords given above allowed to use Open command
+* **state_monitor_limit_mins** Limit in minutes before sending notification of open state
+* **state_monitor_interval_mins** Period to check door state
+* **logfile** Location to write log file
