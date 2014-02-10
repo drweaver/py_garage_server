@@ -38,9 +38,9 @@ To build the electronics - see README and diagrams in the [electronics folder](e
 
 Download [garagecontrol-client.zip](https://github.com/drweaver/gwt_garage_control/releases/latest)
 
-Put file in www folder and unzip: 
+Put file in application folder and unzip to www: 
 ```bash
-unzip garagecontrol-client.zip .
+unzip garagecontrol-client.zip -d www
 ```
 
 Should create following file structure:
