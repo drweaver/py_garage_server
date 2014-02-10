@@ -13,6 +13,8 @@ On the right is the sensor circuit.  There are actually 2 of these, 1 to sense d
 
 The first atttempt at this followed instructions from [this video](http://www.youtube.com/watch?v=b6ZagKRnRdM), however, the 3.3v GPIO wasn't sufficient for the optocoupler in the relay I had which simply meant it did nothing. As mentioned above, I ended up using the Pi's 5V for both Vcc and JD-Vcc in conjunction with a transistor linked to the 3.3V GPIO port which worked perfectly.
 
+Even though R-Pi has software-enabled pull-down resistors I found it wasn't always reliable so I included physical 10k pull-down resistors in both circuits.
+
 ##Relay
 
 [http://www.sainsmart.com/arduino-pro-mini.html](SainSmart 2-Channel 5V Relay Module)
