@@ -60,7 +60,7 @@ sudo pip-3.2 install bottle RPi.GPIO geopy CherryPy mock
 
 ##Configuration
 
-Application settings should be placed in garage_config.json.  Make a copy of the template file and edit with required configuration:
+Application settings should be placed in garage_config.json.  Make a copy of the [template file](_garage_config.json) and edit with required configuration:
 
 ```bash
 cp _garage_config.json garage_config.json
