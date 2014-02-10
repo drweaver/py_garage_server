@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/drweaver/py_garage_server.png?branch=master)](https://travis-ci.org/drweaver/py_garage_server)
+
 Raspberry Pi Garage Door REST server
 
 Used to control an automatic garage door opener, features include:
