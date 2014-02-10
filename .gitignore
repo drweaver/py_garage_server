@@ -34,3 +34,7 @@ nosetests.xml
 .mr.developer.cfg
 .project
 .pydevproject
+
+# User specific configuration
+# Tracked template file is stored at _garage_config.json
+garage_config.json
