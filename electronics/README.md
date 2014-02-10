@@ -11,6 +11,8 @@ The relay operates a circuit (not shown) which is connected to the same points a
 
 On the right is the sensor circuit.  There are actually 2 of these, 1 to sense door opened and another to sense door closed.  You can choose where these go - I put sensors on the rail and 1 magnet on the slider.
 
+The first atttempt at this followed instructions from [this video](http://www.youtube.com/watch?v=b6ZagKRnRdM), however, the 3.3v GPIO wasn't sufficient for the optocoupler in the relay I had which simply meant it did nothing. As mentioned above, I ended up using the Pi's 5V for both Vcc and JD-Vcc in conjunction with a transistor linked to the 3.3V GPIO port which worked perfectly.
+
 ##Relay
 
 [http://www.sainsmart.com/arduino-pro-mini.html](SainSmart 2-Channel 5V Relay Module)
