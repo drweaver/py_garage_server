@@ -8,7 +8,9 @@ Used to control an automatic garage door opener, features include:
 * Email notification when door remains open for a set period
 * Sensing door state changes
 
-[**TODO list**](https://gist.github.com/drweaver/8904740)
+See the [**Blog Post**](http://drweaveruk.blogspot.co.uk/2014/02/raspberry-pi-garage-door-opener.html)
+
+See the [**ToDo list**](https://gist.github.com/drweaver/8904740)
 
 ##Architecture & Design
 
@@ -18,7 +20,7 @@ Used to control an automatic garage door opener, features include:
 * [RPIO](https://pypi.python.org/pypi/RPIO) Raspberry Pi GPIO to control/sense door state 
 * Pyhon finite state machine [fysom](https://github.com/oxplot/fysom) to manage door states and events
 * sqlite database to store state
-* Google Web Toolkit (GWT) browser interface [Garage Control](https://github.com/drweaver/gwt_garage_control)
+* Smart browser interface [Garage Control](https://github.com/drweaver/dart_garage_control)
 * Google OAuth reverse proxy (written in GO) for authentication and authorisation [google_auth_proxy](https://github.com/drweaver/google_auth_proxy)
 
 ```
@@ -36,7 +38,7 @@ To build the electronics - see README and diagrams in the [electronics folder](e
 
 ##Browser app
 
-Download [garagecontrol-client.zip](https://github.com/drweaver/gwt_garage_control/releases/latest)
+Download [garagecontrol-client.zip](https://github.com/drweaver/dart_garage_control/releases/latest)
 
 Put file in application folder and unzip to www: 
 ```bash
@@ -47,8 +49,35 @@ Should create following file structure:
 ```
 www/GarageControl.html
 www/ico/[several images]
-www/garagecontrol/[gwt javascript files] 
+www/[more .dart and .js files]
 ```
+
+Once setup, the browser app can be accessed from URL:
+
+```
+http[s]://<IP or domain>:<port>/gc/
+```
+
+##REST URLs
+
+Available URLs which respond to POST requests
+```
+/gc/garagedoor/state => get the current state
+/gc/garagedoor/open  => open the door
+/gc/garagedoor/close => close the door
+/gc/garagedoor/stop  => stop the door
+/gc/garagedoor/authlocation => check location is authorised for open command
+```
+
+Calling a command will trigger the door switch or have no effect if the transition is not allowed (e.g. calling stop in opened state)
+
+The ```open``` and ```authlocation``` commands require 2 parameters: ```lat``` and ```lng```.
+
+All responses are by JSON e.g.:
+```
+{ 'auth': 'OK', 'state': 'opening' }
+```
+
 
 ##Dependencies
 
