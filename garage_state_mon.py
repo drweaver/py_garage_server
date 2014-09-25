@@ -30,7 +30,7 @@ class LastStateTransitionMonitor(Thread):
 			limit = self._config['state_monitor_limit_mins']
 			if diff < limit: return
 			if diff > 99: diff_msg = str(round(diff/60))+' hours'
-			elif diff > 48: diff_msg = str(round(diff/3600))+' days'
+			elif diff > 2880: diff_msg = str(round(diff/1440))+' days'
 			else: diff_msg = str(diff)+' minutes'
 			msg = 'Garage Door has not been '+self._state+' for '+diff_msg
 		logger.info(msg)
