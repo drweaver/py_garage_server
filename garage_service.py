@@ -2,7 +2,7 @@ from bottle import install, route, post, static_file, run, redirect, get, reques
 from garage import Garage
 from time import sleep
 from garage_notify import GarageNotify
-import RPIO as GPIO
+import pifacedigitalio
 from threading import Lock, Thread
 from garage_auth import GarageAuth, AuthError
 import logging, logging.handlers
@@ -33,9 +33,9 @@ def door_switch_callback(e):
 	config.reload()
 	if door_switch_lock.acquire():
 		logger.info("Operating door switch relay")
-		if config[GarageConfig.door_switch_enabled]: GPIO.output(relay_channel, GPIO.HIGH)
+		if config[GarageConfig.door_switch_enabled]: pfd.relays[relay_channel].turn_on()
 		sleep(1)
-		if config[GarageConfig.door_switch_enabled]: GPIO.output(relay_channel, GPIO.LOW)
+		if config[GarageConfig.door_switch_enabled]: pfd.relays[relay_channel].turn_off()
 		sleep(0.5)
 		door_switch_lock.release()
 		return True
@@ -53,11 +53,12 @@ def update_from_sensor(channel,state,reason,notify):
 	config.reload()
 	if (notify and config[GarageConfig.notify_enabled]): GarageNotify('Garage Door is now '+new_state).start()
 	
-def sensor_changed_callback(channel, state):
+def sensor_changed_callback(event):
 	try: 
 		with sensor_callback_lock:
 			global closed_channel_last_state, opened_channel_last_state
-			
+			channel = event.pin_num
+			state = event.chip.input_pins[channel].value
 			if ( (channel==closed_channel and state==closed_channel_last_state) or 
 				(channel==opened_channel and state==opened_channel_last_state) ):
 				logger.debug("Callback received but already in that state, ignoring...")
@@ -159,27 +160,23 @@ if __name__ == '__main__':
 	opened_channel=config[GarageConfig.opened_channel]
 	debounce_timeout_ms=config[GarageConfig.debounce_timeout_ms]
 	
-	logger.debug("Setting up GPIO")
-	GPIO.setmode(GPIO.BCM)
-	GPIO.setwarnings(False)
+	logger.debug("Setting up PiFace")
+	pfd = pifacedigitalio.PiFaceDigital()
 
-	GPIO.setup(relay_channel, GPIO.OUT, initial=GPIO.LOW)
-	GPIO.setup(closed_channel, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
-	GPIO.setup(opened_channel, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
-
-	closed_channel_last_state = GPIO.input(closed_channel)
-	opened_channel_last_state = GPIO.input(opened_channel)
+	closed_channel_last_state = pfd.input_pins[closed_channel].value
+	opened_channel_last_state = pfd.input_pins[opened_channel].value
 
 	last_state = dao.door_status()
-	if (not last_state): update_from_sensor(closed_channel,GPIO.LOW,"startup",False)
-	elif (GPIO.input(closed_channel) and last_state != Garage.closed): update_from_sensor(closed_channel,GPIO.HIGH,"startup",False)
-	elif (GPIO.input(opened_channel) and last_state != Garage.opened): update_from_sensor(opened_channel,GPIO.HIGH,"startup",False)
+	if (not last_state): update_from_sensor(closed_channel,0,"startup",False)
+	elif (pfd.input_pins[closed_channel].value and last_state != Garage.closed): update_from_sensor(closed_channel,1,"startup",False)
+	elif (pfd.input_pins[opened_channel].value and last_state != Garage.opened): update_from_sensor(opened_channel,1,"startup",False)
 
 	logger.debug("last execution state = "+last_state+" current = "+ dao.door_status())
 	
-	GPIO.add_interrupt_callback(closed_channel, sensor_changed_callback, pull_up_down=GPIO.PUD_DOWN, debounce_timeout_ms=debounce_timeout_ms)
-	GPIO.add_interrupt_callback(opened_channel, sensor_changed_callback, pull_up_down=GPIO.PUD_DOWN, debounce_timeout_ms=debounce_timeout_ms)
-	GPIO.wait_for_interrupts(threaded=True)		
+	listener = pifacedigitalio.InputEventListener(chip=pfd)
+	listener.register(closed_channel, pifacedigitalio.IODIR_BOTH, sensor_changed_callback)
+	listener.register(opened_channel, pifacedigitalio.IODIR_BOTH, sensor_changed_callback)
+	listener.activate()
 	
 	def garage_notify(msg): GarageNotify(config, msg).start()
 	monitor = LastStateTransitionMonitor(dao, config, state=Garage.closed, notify_callback=garage_notify)
@@ -188,8 +185,8 @@ if __name__ == '__main__':
 	logger.debug("Starting the server")
 	run(server='cherrypy', host='0.0.0.0', port=config[GarageConfig.port])
 
-	logger.debug("Cleaning up GPIO")
-	GPIO.cleanup()
+	logger.debug("Cleaning up PiFace")
+	pfd.deinit_board()
 	
 	logger.debug("Stopping Monitor")
 	monitor.stop()
